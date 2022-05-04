@@ -10,5 +10,19 @@
       <h2>Books</h2>
       <%= render 'books/index',books: @books %>
     </div>
+    <h1>ユーザー詳細ページ</h1>
+    <h3><%= @user.email %></h3>
+    <h2>投稿内容</h2>
+    <% @user.books.each do |book| %>
+      <a href="/books/<%= book.id %>"><%= book.title %></a>
+      <hr>
+    <% end %>
+    <h3>いいねしている投稿</h3>
+    <% @user.favorited_books.each do |book| %>
+      <%= book.user.email %>
+      <%= book.title %>
+    <% end %>
+    <%= link_to "ユーザー一覧へ", users_path %>
+    <%= link_to "ホームへ戻る", books_path %>
   </div>
 </div>

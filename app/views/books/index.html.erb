@@ -20,5 +20,27 @@
       <h2>Books</h2>
       <%= render 'index', books: @books%>
     </div>
+    <h1>いいねサンプル</h1>
+    <% if user_signed_in? %>
+      <%= link_to "ログアウト", destroy_user_session_path, :method => :delete %>
+      <%= link_to "マイページへ", user_path(current_user.id) %>
+      <%= link_to "ユーザー一覧へ", users_path %>
+      <h2>投稿する</h2>
+      <%= form_for @book do |f| %>
+        <%= f.text_field :title %>
+        <%= f.submit %>
+      <% end %>
+      <hr>
+      <h2>投稿一覧</h2>
+      <% @books.each do |book| %>
+        <a href="/users/<%= book.user.id %>"><%= book.user.email %></a>
+        <a href="/books/<%= book.id %>"><%= book.title %></a>
+        (<%= book.favorited_users.count %>)
+      <% end %>
+    
+    <% else %>
+      <%= link_to "ユーザー登録", new_user_registration_path %>
+      <%= link_to "ログイン", new_user_session_path %>
+    <% end %>
   </div>
 </div>

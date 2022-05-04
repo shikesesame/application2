@@ -1,9 +1,11 @@
 class BooksController < ApplicationController
+  before_action :authenticate_user!, only: [:show, :create]
 
   def show
     @book = Book.find(params[:id])
     @user = @book.user
     @newbook = Book.new
+    @favorite = Favorite.new
   end
 
   def index
@@ -46,6 +48,6 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :body)
+    params.require(:book).permit(:title, :body, :content)
   end
 end
