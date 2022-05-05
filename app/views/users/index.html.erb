@@ -11,13 +11,17 @@
     <div class='col-md-8 offset-md-1'>
     <h2>Users</h2>
     <%= render 'index',users: @users %>
-    </div>
+    
+    <%= render 'relationships/follow_button', user: @user %>
+    
     <h1>ユーザー一覧</h1>
     <% @users.each do |user| %>
       <a href="/users/<%= user.id %>"><%= user.email %></a>
       <hr>
     <% end %>
     <%= link_to "ホームへ戻る", books_path %>
+    </div>
+    
 
   </div>
 </div>
